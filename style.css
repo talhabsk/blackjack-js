@@ -1,0 +1,125 @@
+* { box-sizing: border-box; }
+body {
+    background-color: #1c1c1c;
+    color: white;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.casino-board {
+    background-color: #016e29;
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    border-radius: 20px;
+    border: 6px solid white;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+h1 { 
+    color: #000000; 
+    font-size: 50px;
+    margin: 0;
+    text-transform: uppercase;
+    align-self: center;
+}
+
+.black {
+    color: black;
+}
+.red {
+    color: red;
+}
+.number-21{
+    color: white
+}
+#balance-el { 
+    color: #ffcc00; 
+    align-self: flex-end; 
+    margin-top: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#message-el { 
+    font-style: italic; 
+    margin: 20px 0px;
+    font-size: 32px;
+    font-weight: 600;
+    min-height: 45px;
+    letter-spacing: 1px;
+}
+
+.zone {
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.zone h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 15px;
+    margin-top: 0;
+    letter-spacing: 2px;
+    padding-bottom: 3px;
+}
+
+#dealer-score, #player-score {
+    color: #ffcc00;
+}
+
+.cards-container {
+    min-height: 60px; 
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 25px;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #ffcc00;
+    color: #1c1c1c;
+    border: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover { 
+    background-color: #ffffff; 
+}
+
+button:disabled {
+    background-color: #444;
+    color: #777;
+    cursor: not-allowed;
+}

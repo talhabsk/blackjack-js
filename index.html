@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="casino-board">
+        
+        <header class="top-bar">
+            <h1>
+            <span class="black">Black</span><span class="red">Jack</span> <span class="number-21">21</span>
+            </h1>
+            <div id="balance-el">Balance: $200</div>
+        </header>
+        
+        <p id="message-el">Ready to play?</p>
+
+        <section class="zone">
+            <h2>Dealer: <span id="dealer-score">0</span></h2>
+            <div id="dealer-cards" class="cards-container"></div>
+        </section>
+
+        <section class="zone">
+            <h2>Player: <span id="player-score">0</span></h2>
+            <div id="player-cards" class="cards-container"></div>
+        </section>
+
+        <div class="controls">
+            <button id="start-btn">START GAME</button>
+            <button id="hit-btn" disabled>HIT</button>
+            <button id="stand-btn" disabled>STAND</button>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
