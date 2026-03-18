@@ -21,6 +21,8 @@ const hitBtn = document.getElementById("hit-btn");
 const standBtn = document.getElementById("stand-btn");
 
 startBtn.addEventListener("click", startGame);
+hitBtn.addEventListener("click", newCard);
+
 function startGame() {
     if (isAlive === true) {
         return;
@@ -29,8 +31,12 @@ function startGame() {
     hasBlackJack = false;
     let firstCard = getRandomCard();
     let secondCard = getRandomCard();
+    let dealerFirstCard = getRandomCard();
+    let dealerSecondCard = getRandomCard();
     playerCards = [firstCard, secondCard];
     playerSum = firstCard + secondCard;
+    dealerCards = [dealerFirstCard, dealerSecondCard];
+    dealerSum = dealerFirstCard + dealerSecondCard;
     renderGame();
 }
 
@@ -61,4 +67,19 @@ function renderGame() {
         isAlive = false;
     }
     messageEl.textContent = message;
+
+    dealerCardsEl.textContent = "Cards: ";
+    for (let i = 0; i < dealerCards.length; i++) {
+        dealerCardsEl.textContent += dealerCards[i] + " ";
+    }
+    dealerScoreEl.textContent = "Score: " + dealerSum;
+}
+
+function newCard(){
+    if (isAlive === true && hasBlackJack === false) {
+        let card = getRandomCard();
+        playerSum = playerSum + card;
+        playerCards.push(card);
+        renderGame();
+    }
 }
