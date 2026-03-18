@@ -1,5 +1,6 @@
 let playerCards = [];
 let dealerCards = [];
+let bet =  50;
 let playerSum = 0;
 let dealerSum = 0;
 let balance = 200;
@@ -28,6 +29,12 @@ function startGame() {
     if (isAlive === true) {
         return;
     }
+    if (balance <= 0) {
+        message = "Game over! You have no more balance. 😭";
+        messageEl.textContent = message;
+        return;
+    }
+
     isAlive = true;
     hasBlackJack = false;
     let firstCard = getRandomCard();
@@ -39,6 +46,7 @@ function startGame() {
     dealerCards = [dealerFirstCard, dealerSecondCard];
     dealerSum = dealerFirstCard + dealerSecondCard;
     renderGame();
+
 }
 
 function getRandomCard() {
@@ -63,9 +71,14 @@ function renderGame() {
     } else if (playerSum === 21) {
         message = "Blackjack! You win. 🥳";
         hasBlackJack = true;
+        isAlive = false;
+        balance += bet;
+        balanceEl.textContent = "Balance: $" + balance;
     } else {
         message = "Bust! You lose. 😭";
         isAlive = false;
+        balance -= bet;
+        balanceEl.textContent = "Balance: $" + balance;
     }
     messageEl.textContent = message;
 
@@ -96,12 +109,19 @@ function stand() {
     
     if (dealerSum > 21) {
         message = "Dealer bust! You win. 🥳";
+        balance += bet;
+        balanceEl.textContent = "Balance: $" + balance;
     } else if (dealerSum === playerSum) {
         message = "It's a tie! 🤝";
     } else if (dealerSum > playerSum) {
         message = "Dealer wins! 😭";
+        balance -= bet;
+        balanceEl.textContent = "Balance: $" + balance;
     } else {
         message = "You win! 🥳";
+        balance += bet;
+        balanceEl.textContent = "Balance: $" + balance;
+
     } 
 
     messageEl.textContent = message;
