@@ -22,6 +22,7 @@ const standBtn = document.getElementById("stand-btn");
 
 startBtn.addEventListener("click", startGame);
 hitBtn.addEventListener("click", newCard);
+standBtn.addEventListener("click", stand);
 
 function startGame() {
     if (isAlive === true) {
@@ -82,4 +83,28 @@ function newCard(){
         playerCards.push(card);
         renderGame();
     }
+}
+
+function stand() {
+    if (isAlive === true && hasBlackJack === false) {
+        while (dealerSum < 17) {
+            let card = getRandomCard();
+            dealerSum += card;
+            dealerCards.push(card);
+        }
+        renderGame();
+    
+    if (dealerSum > 21) {
+        message = "Dealer bust! You win. 🥳";
+    } else if (dealerSum === playerSum) {
+        message = "It's a tie! 🤝";
+    } else if (dealerSum > playerSum) {
+        message = "Dealer wins! 😭";
+    } else {
+        message = "You win! 🥳";
+    } 
+
+    messageEl.textContent = message;
+    isAlive = false;
+  }
 }
