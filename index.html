@@ -28,11 +28,18 @@
             <div id="player-cards" class="cards-container"></div>
         </section>
 
+        <section class="control-section">
+        <div class="bet-container">
+            <label for="bet-input">Bet Amount: </label>
+            <input type="number" id="bet-input" value="50" min="10">
+       </div>
+
         <div class="controls">
-            <button id="start-btn">START GAME</button>
-            <button id="hit-btn" >HIT</button>
-            <button id="stand-btn" >STAND</button>
+            <button id="start-btn" >START GAME</button>
+            <button id="hit-btn" disabled>HIT</button>
+            <button id="stand-btn" disabled>STAND</button>   
         </div>
+        </section>
 
     </main>
 

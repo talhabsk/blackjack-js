@@ -1,6 +1,6 @@
 let playerCards = [];
 let dealerCards = [];
-let bet =  50;
+let bet =  0;
 let playerSum = 0;
 let dealerSum = 0;
 let balance = 200;
@@ -8,6 +8,7 @@ let hasBlackJack = false;
 let isAlive = false;
 let message = "";
 
+const betInput = document.getElementById("bet-input");
 const messageEl = document.getElementById("message-el");
 const balanceEl = document.getElementById("balance-el");
 
@@ -29,13 +30,20 @@ function startGame() {
     if (isAlive === true) {
         return;
     }
+    bet = parseInt(betInput.value);
     if (balance <= 0) {
         message = "Game over! You have no more balance. 😭";
         messageEl.textContent = message;
         return;
     }
-
+    if (bet > balance) {
+        messageEl.textContent = "Not enough money! 💸";
+        return;
+    } 
     isAlive = true;
+    hitBtn.disabled = false;
+    standBtn.disabled = false;
+    startBtn.disabled = true;
     hasBlackJack = false;
     let firstCard = getRandomCard();
     let secondCard = getRandomCard();
@@ -45,7 +53,16 @@ function startGame() {
     playerSum = firstCard + secondCard;
     dealerCards = [dealerFirstCard, dealerSecondCard];
     dealerSum = dealerFirstCard + dealerSecondCard;
-    renderGame();
+    if (dealerSum === 21) {
+        if (playerSum === 21) {
+            endGame("tie", "Both have Blackjack! It's a tie! 🤝");
+        } else {
+            endGame("lose", "Dealer has Blackjack! You lose. 😭");
+        }
+    }else{
+        renderGame();
+    }
+
 
 }
 
@@ -68,19 +85,13 @@ function renderGame() {
     playerScoreEl.textContent = "Score: " + playerSum;
     if (playerSum <= 20) {
         message = "Your turn. Hit or Stand? 🤔";
+        messageEl.textContent = message;
     } else if (playerSum === 21) {
-        message = "Blackjack! You win. 🥳";
+        endGame("win", "Blackjack! You win. 🥳");
         hasBlackJack = true;
-        isAlive = false;
-        balance += bet;
-        balanceEl.textContent = "Balance: $" + balance;
     } else {
-        message = "Bust! You lose. 😭";
-        isAlive = false;
-        balance -= bet;
-        balanceEl.textContent = "Balance: $" + balance;
+        endGame("lose", "Bust! You lose. 😭");
     }
-    messageEl.textContent = message;
 
     dealerCardsEl.textContent = "Cards: ";
     for (let i = 0; i < dealerCards.length; i++) {
@@ -108,23 +119,30 @@ function stand() {
         renderGame();
     
     if (dealerSum > 21) {
-        message = "Dealer bust! You win. 🥳";
-        balance += bet;
-        balanceEl.textContent = "Balance: $" + balance;
+        endGame("win", "Dealer bust! You win. 🥳");
     } else if (dealerSum === playerSum) {
-        message = "It's a tie! 🤝";
+        endGame("tie", "It's a tie! 🤝");
     } else if (dealerSum > playerSum) {
-        message = "Dealer wins! 😭";
-        balance -= bet;
-        balanceEl.textContent = "Balance: $" + balance;
+        endGame("lose", "Dealer wins! 😭");
     } else {
-        message = "You win! 🥳";
-        balance += bet;
-        balanceEl.textContent = "Balance: $" + balance;
-
+        endGame("win", "You win! 🥳");
     } 
 
-    messageEl.textContent = message;
-    isAlive = false;
   }
+}
+
+function endGame(status, reasonMessage) {
+    isAlive = false;
+    hitBtn.disabled = true;
+    standBtn.disabled = true;
+    startBtn.disabled = false;
+    hasBlackJack = false;
+    message = reasonMessage;
+    messageEl.textContent = message;
+    if (status === "win") {
+        balance += bet;
+    } else if (status === "lose") {
+        balance -= bet;
+    }  
+    balanceEl.textContent = "Balance: $" + balance; 
 }

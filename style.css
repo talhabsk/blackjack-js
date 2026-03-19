@@ -103,6 +103,37 @@ h1 {
     margin-top: 20px;
 }
 
+.bet-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.bet-container label {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#bet-input {
+    padding: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    border: 3px solid #ffcc00;
+    background-color: #222;
+    color: white;
+    width: 120px;
+}
+
+#bet-input:focus {
+    outline: none;
+    border-color: #ffffff;
+}
+
 button {
     background-color: #ffcc00;
     color: #1c1c1c;
